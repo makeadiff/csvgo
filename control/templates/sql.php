@@ -4,8 +4,14 @@
 <textarea name="sql_query" rows="15" cols="70" style="width:100%"><?php echo $sql_query ?></textarea>
 <input name="action" value="Try" type="submit" class="btn btn-primary" /><br /><br />
 <input type="text" name="name" placeholder="Report Name"  value="<?php echo $name ?>" />
-<input type="text" name="description" placeholder="Description" size="150" value="<?php echo $description ?>"  />
-<input name="action" value="Save" type="submit" class="btn-xs btn-success" />
+<input type="text" name="description" placeholder="Description" size="150" value="<?php echo $description ?>"  /><br />
+<?php $html->buildInput("db", "Database", 'select', $db, array('options' => array(
+			'madapp'=> 'MadApp',
+			'donut'	=> 'Donut',
+			'site'	=> 'Website'
+		))); ?>
+<input name="action" value="Save" type="submit" class="btn-sm btn btn-success" />
+<input type="hidden" name="id" value="<?php echo $id ?>" />
 </form>
 
 <?php if($data) { ?>
@@ -26,7 +32,7 @@ if($pager->total_items) print $pager->getStatus();
 $header = array_keys($data[0]);
 print "<tr>";
 foreach ($header as $value) {
-	print "<th>" . ucfirst($value) . "</th>";
+	print "<th>" . format($value) . "</th>";
 }
 print "</tr>\n";
 
