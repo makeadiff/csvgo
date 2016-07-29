@@ -11,6 +11,7 @@ $id = i($QUERY, "id", "0");
 
 if(!$action and $name) {
 	list($id, $db, $sql_query, $description) = $sql->getList("SELECT id, db, query,description FROM App_CSVGo WHERE name='$name' LIMIT 0,1");
+	$sql_query = stripslashes($sql_query);
 }
 
 $data = array();
