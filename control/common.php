@@ -1,4 +1,5 @@
 <?php
+$single_user = 0;
 require('../../common.php');
 require_once('../../support/includes/application.php');
 
