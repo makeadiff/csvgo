@@ -5,16 +5,21 @@
 <input name="action" value="Try" type="submit" class="btn btn-primary" /><br /><br />
 <input type="text" name="name" placeholder="Report Name"  value="<?php echo $name ?>" />
 <input type="text" name="description" placeholder="Description" size="150" value="<?php echo $description ?>"  /><br />
-<?php $html->buildInput("db", "Database", 'select', $db, array('options' => array(
+<!-- <?php $html->buildInput("db", "Database", 'select', $db, array('options' => array(
 			'madapp'=> 'MadApp',
 			'donut'	=> 'Donut',
 			'site'	=> 'Website'
-		))); ?>
+		))); ?> -->
 <input name="action" value="Save" type="submit" class="btn-sm btn btn-success" />
 <input type="hidden" name="id" value="<?php echo $id ?>" />
 </form>
 
-<?php if($data) { ?>
+<?php 
+if($sql_error_message) {
+	print $sql_error_message;
+}
+
+if($data) { ?>
 <h3>Results...</h3>
 
 <?php

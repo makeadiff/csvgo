@@ -10,19 +10,7 @@ if(!$name) die("Please provide the name of the CSV report you wish to get");
 $query = $sql->getOne("SELECT query FROM App_CSVGo WHERE name='$name'");
 if(!$query) die("Can't find a CSV Report by the name of '$name'.");
 
-$replace_options = array('city_id', 'center_id', 'batch_id', 'level_id', 'year'	);
-
-if(!isset($QUERY['year'])) $QUERY['year'] = $year;
-
-$replace_conditionals = array();
-
-foreach ($replace_options as $key) {
-	if(isset($QUERY[$key])) {
-		$replace_conditionals['%' . strtoupper($key) . '%'] = $QUERY[$key];
-	}
-}
-
-$replaced_query = str_replace(array_keys($replace_conditionals), array_values($replace_conditionals), $query);
+$replaced_query = preProcessQuery($query);
 
 // Setup for Caching.
 list($data, $cache_key) = getCacheAndKey($name, array('mime' => $mime, 'name' => $name, 'sp_page' => i($QUERY, 'sp_page', 0)));

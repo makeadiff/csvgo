@@ -105,3 +105,8 @@ ul.horizontal li {
 .no-icon {
 	background-image:none !important;
 }
+
+.error-highlight {
+	color: #c7254e;
+	background-color: #f9f2f4;
+}
