@@ -17,8 +17,8 @@ list($data, $cache_key) = getCacheAndKey($name, array('mime' => $mime, 'name' =>
 
 header("Content-type:text/$mime");
 
-if($mime == 'csv') {
-	header('Content-Disposition: attachment; filename="'.$name.'.csv"');
+if($mime == 'csv' or $mime == 'plain') {
+	if($mime == 'csv') header('Content-Disposition: attachment; filename="'.$name.'.csv"');
 
 	if(!$data or $no_cache) {
 		$data = $sql->getAll($replaced_query);
@@ -26,8 +26,7 @@ if($mime == 'csv') {
 	}
 
 	print array2csv($data);
-}
-else {
+} else {
 	$pager = new SqlPager($replaced_query, 100);
 	if(!$data or $no_cache) {
 		$data = $pager->getPage();
