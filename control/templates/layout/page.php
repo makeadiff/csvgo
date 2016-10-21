@@ -50,8 +50,9 @@
 			<div class="navbar-default navbar-static-side" role="navigation">
 				<div class="sidebar-collapse">
 					<ul class="nav" id="side-menu">
-						<li><a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+						<li><a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Reports</a></li>
 						<li><a href="sql.php"><i class="fa fa-dashboard fa-fw"></i> SQL PlayArea</a></li>
+						<li><a href="inactive.php"><i class="fa fa-dashboard fa-fw"></i> Inactive CSV Reports</a></li>
 					</ul>
 					<!-- /#side-menu -->
 				</div>
