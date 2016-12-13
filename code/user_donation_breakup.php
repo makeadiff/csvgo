@@ -31,3 +31,9 @@ foreach ($exdon_data as $id => $value) {
 	else $data[$id] = $exdon_data[$id];
 }
 
+uasort($data, function($a, $b) {
+    return $b['amount'] - $a['amount'];
+});
+
+
+
