@@ -10,6 +10,10 @@
 			'donut'	=> 'Donut',
 			'site'	=> 'Website'
 		))); ?> -->
+<?php 
+$all_verticals = $sql->getById("SELECT id,name FROM Vertical WHERE status='1'");
+$all_verticals[0] = 'None';
+$html->buildInput("vertical_id", "Vertical", 'select', $db, array('options' => $all_verticals)); ?>
 <input name="action" value="Save" type="submit" class="btn-sm btn btn-success" />
 <input type="hidden" name="id" value="<?php echo $id ?>" />
 </form>
