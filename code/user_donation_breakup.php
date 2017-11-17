@@ -1,11 +1,6 @@
 <?php
-if(isset($_SERVER['HTTP_HOST']) and $_SERVER['HTTP_HOST'] == 'makeadiff.in') {
-	$db_donut = 'makeadiff_cfrapp';
-	$db_madapp = 'makeadiff_madapp';
-} else {
-	$db_donut = 'Project_Donut';
-	$db_madapp = 'Project_Madapp';
-}
+$db_donut = 'makeadiff_cfrapp';
+$db_madapp = 'makeadiff_madapp';
 
 $donut_data = $sql->getById("SELECT U.id,MU.email,MU.phone,COALESCE(SUM(D.donation_amount),0) AS amount, C.name AS city, MU.name
 			FROM $db_donut.users U 

@@ -1,10 +1,9 @@
 <?php
-$single_user = 0;
 require('../../common.php');
-require_once('../../support/includes/application.php');
+require_once('../includes/application.php');
 
 if($config['server_host'] == 'localhost') {
-	$config['site_url'] = 'http://localhost/Sites/community/makeadiff/makeadiff.in/';
+	$config['site_url'] = 'http://localhost/MAD/';
 } else {
 	$config['site_url'] = 'http://makeadiff.in/';
 }
@@ -15,12 +14,6 @@ $template->css_folder = 'control/css';
 $template->js_folder = 'control/js';
 // $template->template = 'None';
 
-if(!isset($_GET['stauts']))$_GET['status'] = 1;
+if(!isset($_GET['status']))$_GET['status'] = 1;
 
-$_SESSION['admin_id'] = $_SESSION['user_id'];
-
-if(empty($_SESSION['admin_id'])) {
-	if($template->page != 'login.php') {
-		showMessage("Please login to continue...", "control/login.php", "error");
-	}
-}
+if(!empty($_SESSION['user_id'])) $_SESSION['admin_id'] = $_SESSION['user_id'];

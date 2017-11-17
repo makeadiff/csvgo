@@ -19,7 +19,8 @@ if(!$query) {
 	}
 } else {
 	$type = 'query';
-	$replaced_query = preProcessQuery($query);	
+	$replaced_query = preProcessQuery($query);
+	// dump($query, $replaced_query);
 }
 
 // Setup for Caching.
