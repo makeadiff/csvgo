@@ -16,7 +16,7 @@ $crud->setListingQuery("SELECT B.id, City.name as city, C.name AS center, CONCAT
 FROM Batch B
 INNER JOIN Center C ON B.center_id=C.id
 INNER JOIN City ON C.city_id=City.id
-WHERE B.year=2017
+WHERE B.year=2017 AND C.status='1' AND City.type='actual' AND B.status='1'
 ORDER BY City.name, C.name, B.day");
 $crud->setListingFields("id", "city", "center", "batch", "teachers");
 $crud->addField('teachers', 'Teacher CSV', 'varchar', array(), 
