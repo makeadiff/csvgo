@@ -10,7 +10,17 @@ $file = '';
 
 if(!$name) die("Please provide the name of the CSV report you wish to get");
 
-$query = $sql->getOne("SELECT query FROM App_CSVGo WHERE name='$name'");
+$csvgo = $sql->getAssoc("SELECT id,name,query,status FROM App_CSVGo WHERE name='$name'");
+$query = '';
+if($csvgo) {
+	if($csvgo['status'])
+		$query = $csvgo['query'];
+	else {
+		print "Error: The CSVGo '$name' has been deactivated. Contact binnyva@makeadiff.in if you want to activate this CSVGo again.";
+		exit;
+	}
+}
+
 if(!$query) {
 	if(file_exists('code/' . $name . '.php')) {
 		$type = 'file';
