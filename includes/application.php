@@ -1,6 +1,6 @@
 <?php
-$rel = dirname(dirname(__FILE__));
-require($rel . '/../reports/includes/application.php');
+// $rel = dirname(dirname(__FILE__));
+// require($rel . '/../reports/includes/application.php');
 
 function preProcessQuery($query) {
 	global $QUERY, $year;
