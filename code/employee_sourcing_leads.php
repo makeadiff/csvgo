@@ -1,6 +1,6 @@
 <?php
 $all_verticals = $sql->getById("SELECT id,name FROM Vertical WHERE status='1'");
-$data = $sql->getAll("SELECT name,phone,email,experience,user_id,applied_role,applied_verticals,cv_file FROM Temp_Employee_Signup");
+$data = $sql->getAll("SELECT name,phone,email,experience,user_id,applied_role,applied_verticals,cv_file,cover_letter FROM Temp_Employee_Signup");
 foreach ($data as $index => $row) {
 	if($row['user_id']) {
 		$user = $sql->getAssoc("SELECT name,phone,email,user_type,joined_on,left_on FROM User WHERE id=" . $row['user_id']);
