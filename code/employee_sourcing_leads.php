@@ -26,6 +26,7 @@ foreach ($data as $index => $row) {
 		$vertical[] = $all_verticals[$v];
 	}
 	$row['applied_verticals'] = implode(",", $vertical);
+	$row['cover_letter'] = addslashes($row['cover_letter']);
 
 	$row['cv_file'] = 'https://makeadiff.in/careers/uploads/' . $row['cv_file'];
 
