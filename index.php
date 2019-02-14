@@ -41,7 +41,7 @@ list($data, $cache_key) = getCacheAndKey($name, array('mime' => $mime, 'name' =>
 
 header("Content-type:text/$mime");
 
-if($mime == 'csv' or $mime == 'plain') {
+if($mime == 'csv' or $mime == 'plain' or $mime == 'json') {
 	if($mime == 'csv') header('Content-Disposition: attachment; filename="'.$name.'.csv"');
 
 	if(!$data or $no_cache) {
@@ -58,7 +58,12 @@ if($mime == 'csv' or $mime == 'plain') {
 	$Log->log("Fetched the CSV '$name' : $cache_status in $execution_time ms");
 	$Log->close();
 
-	print array2csv($data);
+	if($mime == 'json') {
+		header("Content-type: application/json");
+		print json_encode($data);
+	} else {
+		print array2csv($data);
+	}
 } else {
 	$pager = new SqlPager($replaced_query, 100);
 	if(!$data or $no_cache) {
