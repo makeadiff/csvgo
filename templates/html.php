@@ -2,13 +2,15 @@
 <h2>Results...</h2>
 
 <?php
-$pager->link_template = '<a href="%%PAGE_LINK%%" class="page-%%CLASS%%"><img alt="%%TEXT%%" src="images/icons/arrows/%%CLASS%%.png" /></a>';
-if($pager->total_pages > 1) {
-	print $pager->getLink("first") . $pager->getLink("back");
-	$pager->printPager();
-	print $pager->getLink("next") . $pager->getLink("last") . '<br />';
+if($pager) {
+	$pager->link_template = '<a href="%%PAGE_LINK%%" class="page-%%CLASS%%"><img alt="%%TEXT%%" src="images/icons/arrows/%%CLASS%%.png" /></a>';
+	if($pager->total_pages > 1) {
+		print $pager->getLink("first") . $pager->getLink("back");
+		$pager->printPager();
+		print $pager->getLink("next") . $pager->getLink("last") . '<br />';
+	}
+	if($pager->total_items) print $pager->getStatus();
 }
-if($pager->total_items) print $pager->getStatus();
 ?>
 
 <table class="table table-striped">

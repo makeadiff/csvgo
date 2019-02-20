@@ -21,6 +21,7 @@ if($csvgo) {
 	}
 }
 
+$replaced_query = '';
 if(!$query) {
 	if(file_exists('code/' . $name . '.php')) {
 		$type = 'file';
@@ -31,7 +32,6 @@ if(!$query) {
 } else {
 	$type = 'query';
 	$replaced_query = preProcessQuery($query);
-	// dump($query, $replaced_query);
 }
 
 $time_start = microtime(true);
@@ -65,10 +65,13 @@ if($mime == 'csv' or $mime == 'plain' or $mime == 'json') {
 		print array2csv($data);
 	}
 } else {
-	$pager = new SqlPager($replaced_query, 100);
-	if(!$data or $no_cache) {
-		$data = $pager->getPage();
-		setCache($cache_key, $data);
+	$pager = false;
+	if($type == 'query') {
+		$pager = new SqlPager($replaced_query, 100);
+		if(!$data or $no_cache) {
+			$data = $pager->getPage();
+			setCache($cache_key, $data);
+		}
 	}
 
 	render('html.php');
