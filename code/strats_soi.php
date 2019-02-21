@@ -8,7 +8,9 @@ $survey_id = 6;
 $data = $sql->getAll("SELECT U.id,U.name,U.email,U.phone 
 	FROM User U 
 	INNER JOIN Survey_Response R ON R.responder_id=U.id 
-	WHERE R.survey_id=$survey_id GROUP BY responder_id");
+	WHERE R.survey_id=$survey_id 
+	GROUP BY responder_id
+	ORDER BY MAX(R.added_on)");
 
 foreach ($data as $index => $row) {
 	$responses = $sql->getAll("SELECT R.survey_question_id, R.survey_choice_id, R.response
