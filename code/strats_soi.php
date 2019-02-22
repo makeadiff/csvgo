@@ -35,7 +35,7 @@ foreach ($data as $index => $row) {
 			elseif($res['survey_choice_id'] == 24) $row['self_motivated'] = 'Yes';
 			elseif($res['survey_choice_id'] == 25) $row['sufficient_time'] = 'Yes';
 			elseif($res['survey_choice_id'] == 26) $row['works_on_my_own'] = 'Yes';
-			elseif($res['survey_choice_id'] == 27) $row['perspective_and_passion'] = 'Yes';
+			elseif($res['survey_choice_id'] == 79) $row['perspective_and_passion'] = 'Yes';
 		}
 	}
 	
