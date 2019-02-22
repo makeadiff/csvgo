@@ -5,7 +5,7 @@ $all_verticals[0] = 'None';
 $all_traits = $sql->getById("SELECT id,name FROM Survey_Choice WHERE survey_question_id=205");
 $survey_id = 6;
 
-$data = $sql->getAll("SELECT U.id,U.name,U.email,U.phone 
+$data = $sql->getAll("SELECT U.id,U.name,U.email,U.mad_email,U.phone 
 	FROM User U 
 	INNER JOIN Survey_Response R ON R.responder_id=U.id 
 	WHERE R.survey_id=$survey_id 
