@@ -23,6 +23,7 @@ foreach ($data as $index => $row) {
 	$row['self_motivated'] = 'No';
 	$row['sufficient_time'] = 'No';
 	$row['works_on_my_own'] = 'No';
+	$row['perspective_and_passion'] = 'No';
 
 	foreach ($responses as $res) {
 		if($res['survey_question_id'] == '206') $row['first_choice'] = $all_verticals[$res['survey_choice_id']];
@@ -34,6 +35,7 @@ foreach ($data as $index => $row) {
 			elseif($res['survey_choice_id'] == 24) $row['self_motivated'] = 'Yes';
 			elseif($res['survey_choice_id'] == 25) $row['sufficient_time'] = 'Yes';
 			elseif($res['survey_choice_id'] == 26) $row['works_on_my_own'] = 'Yes';
+			elseif($res['survey_choice_id'] == 27) $row['perspective_and_passion'] = 'Yes';
 		}
 	}
 	
