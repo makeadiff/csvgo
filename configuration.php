@@ -4,4 +4,4 @@
 $config = $config_data + array(
 	'site_title'	=> 'CSV: Go',
 );
-$config['site_home'] = $config_data['site_home'] . 'apps/csvgo/';
+$config['site_url'] = $config_data['site_url'] . 'apps/csvgo/';

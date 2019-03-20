@@ -30,7 +30,7 @@ foreach ($data as $index => $row) {
 	$row['applied_verticals'] = implode(",", $vertical);
 	$row['cover_letter'] = str_replace('"', "'", $row['cover_letter']);
 
-	$row['cv_file'] = 'https://makeadiff.in/careers/uploads/' . $row['cv_file'];
+	$row['cv_file'] = 'https://makeadiff.in/careers-form/uploads/' . $row['cv_file'];
 
 	$data[$index] = $row;
 }
