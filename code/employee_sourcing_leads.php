@@ -25,6 +25,7 @@ foreach ($data as $index => $row) {
 	$verts = explode(",",  $row['applied_verticals']);
 	$vertical = [];
 	foreach ($verts as $v) {
+		if(!$v) continue;
 		$vertical[] = $all_verticals[$v];
 	}
 	$row['applied_verticals'] = implode(",", $vertical);
