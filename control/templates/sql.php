@@ -5,15 +5,10 @@
 <input name="action" value="Try" type="submit" class="btn btn-primary" /><br /><br />
 <input type="text" name="name" placeholder="Report Name"  value="<?php echo $name ?>" />
 <input type="text" name="description" placeholder="Description" size="150" value="<?php echo $description ?>"  /><br />
-<!-- <?php $html->buildInput("db", "Database", 'select', $db, array('options' => array(
-			'madapp'=> 'MadApp',
-			'donut'	=> 'Donut',
-			'site'	=> 'Website'
-		))); ?> -->
 <?php 
 $all_verticals = $sql->getById("SELECT id,name FROM Vertical WHERE status='1'");
 $all_verticals[0] = 'None';
-$html->buildInput("vertical_id", "Vertical", 'select', $db, array('options' => $all_verticals)); ?>
+$html->buildInput("vertical_id", "Vertical", 'select', $vertical_id, array('options' => $all_verticals)); ?>
 <input name="action" value="Save" type="submit" class="btn-sm btn btn-success" />
 <input type="hidden" name="id" value="<?php echo $id ?>" />
 </form>

@@ -4,16 +4,16 @@ $html = new HTML;
 
 $action 	= i($QUERY,'action');
 $name 		= i($QUERY,'name');
+$vertical_id= i($QUERY,'vertical_id');
 $description= i($PARAM, "description");
 $sql_query 	= i($PARAM, "sql_query");
-$db 		= i($PARAM, "db", "madapp");
 $id 		= i($QUERY, "id", "0");
 
 $sql_error_query 	= '';
 $sql_error_message 	= '';
 
 if(!$action and $name) {
-	list($id, $db, $sql_query, $description) = $sql->getList("SELECT id, db, query,description FROM App_CSVGo WHERE name='$name' LIMIT 0,1");
+	list($id, $sql_query, $description, $vertical_id) = $sql->getList("SELECT id, query,description,vertical_id FROM App_CSVGo WHERE name='$name' LIMIT 0,1");
 	$sql_query = stripslashes($sql_query);
 }
 
@@ -34,20 +34,20 @@ if($action) {
 		if($id and $id != 0) {
 			$csvgo_id = $id;
 			$sql->update("App_CSVGo", array(
-				'name'		=> unformat($QUERY['name']),
+				'name'			=> unformat($QUERY['name']),
 				'description'	=> $QUERY['description'],
-				'query'		=> $QUERY['sql_query'],
-				'db'		=> $db,
+				'query'			=> $QUERY['sql_query'],
+				'vertical_id'	=> $QUERY['vertical_id'],
 			), "id=$csvgo_id");
 
 		} else {
 			$csvgo_id = $sql->insert("App_CSVGo", array(
-				'name'		=> unformat($QUERY['name']),
+				'name'			=> unformat($QUERY['name']),
 				'description'	=> $QUERY['description'],
-				'query'		=> $QUERY['sql_query'],
-				'db'		=> $db,
-				'added_on'	=> 'NOW()',
-				'status'	=> '1'
+				'query'			=> $QUERY['sql_query'],
+				'vertical_id'	=> $QUERY['vertical_id'],
+				'added_on'		=> 'NOW()',
+				'status'		=> '1'
 			));
 		}
 

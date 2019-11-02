@@ -2,6 +2,8 @@
 require('../../common.php');
 require_once('../includes/application.php');
 
+accessControl(['group_type' => 'national']);
+
 $config['site_folder'] = dirname(__FILE__);
 $template->page = str_replace("control/", "", $template->page);
 $template->css_folder = 'control/css';
