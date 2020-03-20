@@ -1,5 +1,6 @@
 <?php
 require './common.php' ;
+use iframe\HTML\HTML;
 $html = new HTML;
 
 $action 	= i($QUERY,'action');

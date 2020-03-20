@@ -1,6 +1,7 @@
 <?php
 require './common.php';
-require 'Development/Logger.php';
+use iframe\Development\Logger;
+use iframe\DB\SqlPager;
 
 $name = i($QUERY, 'name');
 $mime = i($QUERY, 'mime', 'csv'); // Could be 'octect-stream'

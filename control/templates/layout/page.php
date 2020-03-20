@@ -7,10 +7,10 @@
 	<!-- Core CSS - Include with every page -->
 	<link href="<?php echo $config['common_library_url'] ?>bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo $config['common_library_url'] ?>bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo $config['common_library_url'] ?>images/silk_theme.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo $config['site_url'] ?>control/css/style.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo $config['site_url'] ?>control/themes/sb-admin-v2/font-awesome/css/font-awesome.css" rel="stylesheet">
-	<link href="<?php echo $config['site_url'] ?>control/themes/sb-admin-v2/css/sb-admin.css" rel="stylesheet">
+	<link href="<?php echo $config['common_library_url'] ?>assets/images/silk_theme.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo $config['site_url'] ?>css/style.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo $config['site_url'] ?>themes/sb-admin-v2/font-awesome/css/font-awesome.css" rel="stylesheet">
+	<link href="<?php echo $config['site_url'] ?>themes/sb-admin-v2/css/sb-admin.css" rel="stylesheet">
 	<?php echo $css_includes ?>
 </head>
 <body>
@@ -91,8 +91,8 @@ if(!empty($GLOBALS['page'])) {
 	<script src="<?php echo $config['common_library_url'] ?>bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
 	<script src="<?php echo $config['common_library_url'] ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="<?php echo $config['site_url'] ?>js/application.js" type="text/javascript"></script>
-	<script src="<?php echo $config['site_url'] ?>control/themes/sb-admin-v2/js/sb-admin.js"></script>
-	<script src="<?php echo $config['site_url'] ?>control/themes/sb-admin-v2/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="<?php echo $config['site_url'] ?>themes/sb-admin-v2/js/sb-admin.js"></script>
+	<script src="<?php echo $config['site_url'] ?>themes/sb-admin-v2/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 	<?php echo $js_includes ?>
 </body>
 </html>

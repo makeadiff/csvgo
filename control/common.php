@@ -1,5 +1,5 @@
 <?php
-require('../../common.php');
+require('../../commons/common.php');
 require_once('../includes/application.php');
 
 accessControl(['group_type' => 'national']);

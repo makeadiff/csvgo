@@ -1,5 +1,6 @@
 <?php
 require './common.php' ;
+use iframe\iframe\Crud;
 
 $crud = new Crud('App_CSVGo');
 $crud->addField("name", "Name", 'varchar',array(), array('text'=>'$row["name"]', 'url'=> '"sql.php?name=" . $row["name"]'), 'text', 'url');
