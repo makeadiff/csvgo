@@ -19,21 +19,46 @@ $fellows = $sql->getAll("SELECT DISTINCT U.id, U.name, US.group_id
 
 // Badges Template
 $badges = [
-	'teacher'	=> false, 
-	'mentor'	=> false, 
-	'fundraiser'=> false, 
-	'cfr_coach'	=> false, 
-	'wingman'	=> false, 
-	'dc_lead'	=> false, 
-	'credited'	=> false, 
+	'teacher'	=> false,
+	'mentor'	=> false,
+	'fundraiser'=> false,
+	'cfr_coach'	=> false,
+	'wingman'	=> false,
+	'dc_lead'	=> false,
+	'credited'	=> false,
 ];
+
+// Get data from spreadsheets 
+// From the sheet https://docs.google.com/spreadsheets/d/1ueuL-F4D3_i97ptWXXBp_FGaho9gsmPQJrqQV25gAsI/edit#gid=0
+$sheet_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRoJ1EiHoDyFnDPYpZJmI1lUVazW-RsR2l_K_yCWTmE3fGrlbT8zf-fFKm63Xdd4gbs_VIFccbHwBLi/pub?gid=1045827812&single=true&output=csv";
+require 'includes/classes/ParseCSV.php';
+$sheet = new ParseCSV($sheet_url);
+$data_points = [];
+foreach ($sheet as $row) {
+	if(!$row['A']) continue;
+
+	$value = '';
+	if(!empty($row['G'])) {
+		if(stripos($row['G'], 'cause') or stripos($row['G'], 'above')) $value = 'cause';
+		else if(stripos($row['G'], 'leadership') or stripos($row['G'], 'ownership')) $value = 'leadership';
+		else if(stripos($row['G'], 'scense') or stripos($row['G'], 'family')) $value = 'family';
+	}
+
+	$data_points[$row['A']] = [
+		'user_id'	=> $row['A'],
+		// 'name'		=> $row['B'],
+		'why'		=> (!empty($row['F'])) ? $row['F'] : '',
+		'value'		=> $value
+	];
+}
 
 $last_year = $year - 1;
 foreach($fellows as $i => $f) {
+	$user_id = $f['id'];
 	$historical_roles = $sql->getAll("SELECT UG.year, GROUP_CONCAT(DISTINCT G.name SEPARATOR ',') AS roles
 				FROM `Group` G
 				INNER JOIN UserGroup UG ON UG.group_id=G.id
-				WHERE UG.user_id={$f['id']} AND G.id NOT IN (368, 387)
+				WHERE UG.user_id={$user_id} AND G.id NOT IN (368, 387)
 				GROUP BY UG.year
 				ORDER BY UG.year DESC");
 	$f['history'] = keyFormat($historical_roles, ['year', 'roles']);
@@ -53,6 +78,8 @@ foreach($fellows as $i => $f) {
 	
 	$f['raised'] = $money_raised;
 	$f['badges'] = $fellow_badge;
+	$f['value'] = (!empty($data_points[$user_id]['value']) ? $data_points[$user_id]['value'] : '');
+	$f['why_fellow'] = (!empty($data_points[$user_id]['why']) ? $data_points[$user_id]['why'] : '');
 	$fellows[$i] = $f;
 }
 
