@@ -38,7 +38,12 @@ if(!$query) {
 $time_start = microtime(true);
 $cache_status = 'From Cache';
 // Setup for Caching.
-list($data, $cache_key) = getCacheAndKey($name, array('mime' => $mime, 'name' => $name, 'sp_page' => i($QUERY, 'sp_page', 0)));
+list($data, $cache_key) = getCacheAndKey($name, [
+											'mime' => $mime, 
+											'name' => $name, 
+											'city_id' => i($QUERY, 'city_id', 0), 
+											'sp_page' => i($QUERY, 'sp_page', 0)
+										]);
 
 header("Content-type:text/$mime");
 

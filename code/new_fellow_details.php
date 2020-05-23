@@ -4,7 +4,7 @@ $city_id = $QUERY['city_id'];
 $common = new Common;
 $verticals = $common->getVerticals();
 $groups = idNameFormat($common->getGroups(['type' => 'fellow']));
-$fellows = $sql->getAll("SELECT DISTINCT U.id, U.name, US.group_id
+$fellows = $sql->getAll("SELECT DISTINCT U.id, U.name, US.group_id, U.city_id
 	FROM User U
 	INNER JOIN FAM_UserStage US ON US.user_id = U.id
 	INNER JOIN FAM_UserGroupPreference UGP ON UGP.user_id = U.id
@@ -17,6 +17,7 @@ $fellows = $sql->getAll("SELECT DISTINCT U.id, U.name, US.group_id
 		AND US.group_id IN (2,4,5,11,15,19,272,269,370,375,378,389)
 	ORDER BY U.name ASC");
 
+// dump($fellows);exit;
 // Badges Template
 $badges = [
 	'teacher'	=> false,
