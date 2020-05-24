@@ -70,7 +70,13 @@ foreach($fellows as $i => $f) {
 	$all_groups = implode(";", array_values($f['history']));
 	$fellow_badge = $badges;
 
-	if(stripos($all_groups, "ES Volunteer") !== false) $fellow_badge['teacher'] = true;
+	if(
+		(stripos($all_groups, "ES Volunteer") !== false) or 
+		(stripos($all_groups, "Foundational Skills Volunteer") !== false) or 
+		(stripos($all_groups, "Aftercare ASV") !== false) or 
+		(stripos($all_groups, "Aftercare Wingman") !== false) or 
+		(stripos($all_groups, "Transition Readiness Wingman") !== false) or 
+		(stripos($all_groups, "Transition Readiness ASV") !== false)) $fellow_badge['teacher'] = true;
 	if((stripos($all_groups, "ES Mentors") !== false) or (stripos($all_groups, "Foundation Mentor") !== false)) $fellow_badge['mentor'] = true;
 	if(stripos($all_groups, "FR Volunteer") !== false) $fellow_badge['cfr_coach'] = true;
 	if(stripos($all_groups, "Wingman") !== false) $fellow_badge['wingman'] = true;
@@ -79,7 +85,7 @@ foreach($fellows as $i => $f) {
 	if(stripos($all_groups, "Finance Volunteer") !== false) $fellow_badge['finance_volunteer'] = true;
 	$money_raised = intval($sql->getOne("SELECT SUM(amount) FROM Donut_Donation 
 											WHERE fundraiser_user_id=$f[id] AND added_on > '$last_year-05-01 00:00:00'"));
-	if($money_raised > 200) $fellow_badge['fundraiser'] = true;
+	if($money_raised > 200) $fellow_badge['fundraiser'] = true; // :TODO: Get actual number from FR
 	
 	$f['raised'] = $money_raised;
 	$f['badges'] = $fellow_badge;
