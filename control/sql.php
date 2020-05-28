@@ -1,7 +1,6 @@
 <?php
 require './common.php' ;
-use iframe\HTML\HTML;
-$html = new HTML;
+$html = new iframe\HTML\HTML;
 
 $action 	= i($QUERY,'action');
 $name 		= i($QUERY,'name');
@@ -27,7 +26,7 @@ if($action) {
 	$sql->options['error_handling'] = 'callback';
 	$sql->options['error_callback'] = 'sql_error';
 
-	$pager = new SqlPager($sql_query, 100);
+	$pager = new iframe\DB\SqlPager($sql_query, 100);
 	$data = $pager->getPage();
 
 	if($QUERY['action'] == 'Save') {
