@@ -60,9 +60,9 @@ if($mime == 'csv' or $mime == 'plain' or $mime == 'json') {
 	$time_end = microtime(true);
 	$execution_time = $time_end - $time_start;
 
-	$Log = new Logger('Log', 'mysql', 'CSVGo');
-	$Log->log("Fetched the CSV '$name' : $cache_status in $execution_time ms");
-	$Log->close();
+	// $Log = new Logger('Log', 'mysql', 'CSVGo');
+	// $Log->log("Fetched the CSV '$name' : $cache_status in $execution_time ms");
+	// $Log->close();
 
 	if($mime == 'json') {
 		header("Content-type: application/json");
