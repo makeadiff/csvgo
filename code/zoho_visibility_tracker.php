@@ -1,4 +1,6 @@
 <?php
+ini_set('max_execution_time', '300');
+
 // Purpose: Convert JSON to CSV
 $response = load('https://creator.zoho.com/api/json/mad-recruit/view/Visibility_Tracker1?authtoken=cdcfd4eb1b77b0835f4339827906e42a&scope=creatorapi', ['cache' => false]);
 
