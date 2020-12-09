@@ -5,7 +5,7 @@
 <pre><?= var_dump($contents) ?></pre>
 <?php } ?>
 
-<h3>All Keys</h3>
+<h3>All Keys(<?= count($all_keys) ?>)</h3>
 
 <ul>
 <?php foreach($all_keys as $k) { ?>

@@ -40,10 +40,7 @@ $time_start = microtime(true);
 $cache_status = 'From Cache';
 
 // Setup for Caching.
-$parameters = [
-				'mime' => $mime, 
-				'name' => $name, 
-			];
+$parameters = ['mime' => $mime];
 $required_query_parameters = ['sp_page', 'city_id']; // These paratemers need to be stored in the key name.
 foreach($required_query_parameters as $para) {
 	if(isset($QUERY[$para])) {
