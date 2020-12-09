@@ -38,13 +38,19 @@ if(!$query) {
 
 $time_start = microtime(true);
 $cache_status = 'From Cache';
+
 // Setup for Caching.
-list($data, $cache_key) = getCacheAndKey($name, [
-											'mime' => $mime, 
-											'name' => $name, 
-											'city_id' => i($QUERY, 'city_id', 0), 
-											'sp_page' => i($QUERY, 'sp_page', 0)
-										]);
+$parameters = [
+				'mime' => $mime, 
+				'name' => $name, 
+			];
+$required_query_parameters = ['sp_page', 'city_id']; // These paratemers need to be stored in the key name.
+foreach($required_query_parameters as $para) {
+	if(isset($QUERY[$para])) {
+		$parameters[$para] = $QUERY[$para];
+	}
+}
+list($data, $cache_key) = getCacheAndKey($name, $parameters);
 
 header("Content-type:text/$mime");
 

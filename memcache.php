@@ -14,6 +14,7 @@ $key = i($QUERY, 'key', false);
 $contents = false;
 
 if($key) {
+	$key = base64_decode($key);
 	$contents = $mem->get($key);
 }
 
