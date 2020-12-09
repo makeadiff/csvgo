@@ -6,6 +6,7 @@ use iframe\DB\SqlPager;
 $name = i($QUERY, 'name');
 $mime = i($QUERY, 'mime', 'csv'); // Could be 'octect-stream'
 $no_cache = i($QUERY, 'no_cache', false);
+$debug = i($QUERY, 'debug', false);
 $type = 'query';
 $file = '';
 
@@ -53,16 +54,17 @@ if($mime == 'csv' or $mime == 'plain' or $mime == 'json') {
 	if(!$data or $no_cache) {
 		if($type == 'query') $data = $sql->getAll($replaced_query);
 		elseif($type == 'file') require($file);
-
 		setCache($cache_key, $data);
 		$cache_status = 'From Database';
 	}
 	$time_end = microtime(true);
 	$execution_time = $time_end - $time_start;
 
-	// $Log = new Logger('Log', 'mysql', 'CSVGo');
-	// $Log->log("Fetched the CSV '$name' : $cache_status in $execution_time ms");
-	// $Log->close();
+	if($debug) {
+		$Log = new Logger('Log', 'mysql', 'CSVGo');
+		$Log->log("Fetched the CSV '$name' : $cache_status in $execution_time ms. Length: " . count($data) . ". CacheKey: $cache_key");
+		$Log->close();
+	}
 
 	if($mime == 'json') {
 		header("Content-type: application/json");
@@ -78,7 +80,11 @@ if($mime == 'csv' or $mime == 'plain' or $mime == 'json') {
 			$data = $pager->getPage();
 			setCache($cache_key, $data);
 		}
-	} elseif($type == 'file') require($file); // :TODO: - This woun't have paging.
+	} elseif($type == 'file') {
+		// :TODO: Cache this?
+		require($file); // :TODO: - This woun't have paging.
+	}
+
 
 	render('html.php');
 }
