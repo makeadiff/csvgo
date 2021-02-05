@@ -2,11 +2,11 @@
 function preProcessQuery($query) {
 	global $QUERY, $year;
 
-	$replace_options = array('city_id', 'center_id', 'batch_id', 'level_id', 'year'	);
+	$replace_options = [ 'city_id', 'center_id', 'batch_id', 'level_id', 'year', 'vertical_id' ];
 
 	if(!isset($QUERY['year'])) $QUERY['year'] = $year;
 
-	$replace_conditionals = array();
+	$replace_conditionals = [];
 
 	foreach ($replace_options as $key) {
 		if(isset($QUERY[$key])) {
