@@ -87,7 +87,7 @@ if($mime == 'csv' or $mime == 'plain' or $mime == 'json') {
 		// :TODO: Cache this?
 		require($file); // :TODO: - This woun't have paging.
 	}
-
+	print $mime;
 
 	render('html.php');
 }
