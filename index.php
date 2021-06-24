@@ -21,7 +21,7 @@ if($csvgo) {
 		print "Error: The CSVGo '$name' has been deactivated. Contact binnyva@makeadiff.in if you want to activate this CSVGo again.";
 		exit;
 	}
-} 
+}
 
 $replaced_query = '';
 if(!$query) {
@@ -49,7 +49,7 @@ foreach($required_query_parameters as $para) {
 }
 list($data, $cache_key) = getCacheAndKey($name, $parameters);
 
-header("Content-type:text/$mime");
+header("Content-type: text/$mime");
 
 if($mime == 'csv' or $mime == 'plain' or $mime == 'json') {
 	if($mime == 'csv') header('Content-Disposition: attachment; filename="'.$name.'.csv"');
@@ -85,9 +85,8 @@ if($mime == 'csv' or $mime == 'plain' or $mime == 'json') {
 		}
 	} elseif($type == 'file') {
 		// :TODO: Cache this?
-		require($file); // :TODO: - This woun't have paging.
+		require($file); // :TODO: - This won't have paging.
 	}
-	print $mime;
 
 	render('html.php');
 }
