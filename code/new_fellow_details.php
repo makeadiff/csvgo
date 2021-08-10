@@ -1,5 +1,9 @@
 <?php
+//*
 $city_id = $QUERY['city_id'];
+
+$year = 2020; // :HARDCODE: Should be ($year - 1)
+$photo_folders = [ realpath(__DIR__ . '/../../continuation_signup/photo_uploads'), realpath(__DIR__ . '/../../../storage/users/profile_photos/600x800') ];
 
 $common = new Common;
 $verticals = $common->getVerticals();
@@ -19,8 +23,8 @@ $fellows = $sql->getAll("SELECT DISTINCT U.id, U.name, US.group_id, IF(UGP.city_
 			)
 		AND US.group_id IN (2,4,5,11,15,19,272,269,370,375,378,389)
 	ORDER BY U.name ASC");
-
 // dump($fellows);exit;
+
 // Badges Template
 $badges = [
 	'teacher'	=> false,
@@ -36,27 +40,27 @@ $badges = [
 
 // Get data from spreadsheets 
 // From the sheet https://docs.google.com/spreadsheets/d/1ueuL-F4D3_i97ptWXXBp_FGaho9gsmPQJrqQV25gAsI/edit#gid=0
-$sheet_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRoJ1EiHoDyFnDPYpZJmI1lUVazW-RsR2l_K_yCWTmE3fGrlbT8zf-fFKm63Xdd4gbs_VIFccbHwBLi/pub?gid=1045827812&single=true&output=csv";
-require 'includes/classes/ParseCSV.php';
-$sheet = new ParseCSV($sheet_url);
-$data_points = [];
-foreach ($sheet as $row) {
-	if(!$row['A']) continue;
+// $sheet_url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRoJ1EiHoDyFnDPYpZJmI1lUVazW-RsR2l_K_yCWTmE3fGrlbT8zf-fFKm63Xdd4gbs_VIFccbHwBLi/pub?gid=1045827812&single=true&output=csv";
+// require 'includes/classes/ParseCSV.php';
+// $sheet = new ParseCSV($sheet_url);
+// $data_points = [];
+// foreach ($sheet as $row) {
+// 	if(!$row['A']) continue;
 
-	$value = '';
-	if(!empty($row['G'])) {
-		if(stripos($row['G'], 'cause') or stripos($row['G'], 'above')) $value = 'cause';
-		else if(stripos($row['G'], 'leadership') or stripos($row['G'], 'ownership')) $value = 'leadership';
-		else if(stripos($row['G'], 'scense') or stripos($row['G'], 'family')) $value = 'family';
-	}
+// 	$value = '';
+// 	if(!empty($row['G'])) {
+// 		if(stripos($row['G'], 'cause') or stripos($row['G'], 'above')) $value = 'cause';
+// 		else if(stripos($row['G'], 'leadership') or stripos($row['G'], 'ownership')) $value = 'leadership';
+// 		else if(stripos($row['G'], 'scense') or stripos($row['G'], 'family')) $value = 'family';
+// 	}
 
-	$data_points[$row['A']] = [
-		'user_id'	=> $row['A'],
-		// 'name'		=> $row['B'],
-		'why'		=> (!empty($row['F'])) ? $row['F'] : '',
-		'value'		=> $value
-	];
-}
+// 	$data_points[$row['A']] = [
+// 		'user_id'	=> $row['A'],
+// 		// 'name'		=> $row['B'],
+// 		'why'		=> (!empty($row['F'])) ? $row['F'] : '',
+// 		'value'		=> $value
+// 	];
+// }
 
 $last_year = $year - 1;
 foreach($fellows as $i => $f) {
@@ -92,9 +96,24 @@ foreach($fellows as $i => $f) {
 	
 	$f['raised'] = $money_raised;
 	$f['badges'] = $fellow_badge;
-	$f['value'] = (!empty($data_points[$user_id]['value']) ? $data_points[$user_id]['value'] : '');
-	$f['why_fellow'] = (!empty($data_points[$user_id]['why']) ? $data_points[$user_id]['why'] : '');
+	// $f['value'] = (!empty($data_points[$user_id]['value']) ? $data_points[$user_id]['value'] : '');
+	// $f['why_fellow'] = (!empty($data_points[$user_id]['why']) ? $data_points[$user_id]['why'] : '');
+
+	// Find Photos
+	$photo_url = "";
+	foreach($photo_folders as $folder) {
+		$photo_file = joinPath($folder, $user_id . '.jpg');
+
+		if(file_exists($photo_file)) {
+			$makeadiff_folder = realpath(dirname(dirname(dirname(__DIR__))));
+			$photo_url = str_replace($makeadiff_folder, "https://makeadiff.in", $photo_file);
+			break;
+		}
+	}
+	$f['photo_url'] = $photo_url;
+
 	$fellows[$i] = $f;
 }
+// */
 
 $data = $fellows;
