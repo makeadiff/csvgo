@@ -15,9 +15,7 @@ $fellows = $sql->getAll("SELECT DISTINCT U.id, U.name, U.phone,U.email, US.group
 		AND UGP.year = $year
 		AND US.year = $year
 		AND US.group_id IN (2,4,5,11,15,19,272,269,370,375,378,389)
-	ORDER BY city_id, U.name ASC
-	LIMIT 0,20");
-
+	ORDER BY city_id, U.name ASC");
 
 $last_year = $year - 1;
 foreach($fellows as $i => $f) {
