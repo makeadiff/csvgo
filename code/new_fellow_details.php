@@ -32,6 +32,7 @@ $badges = [
 	'fundraiser'=> false,
 	'cfr_coach'	=> false,
 	'wingman'	=> false,
+	'campaigns_volunteer'=>false,
 	'hc_volunteer'		=> false,
 	'finance_volunteer'	=> false,
 	'dc_lead'	=> false,
@@ -90,8 +91,9 @@ foreach($fellows as $i => $f) {
 	if(stripos($all_groups, "Dream Camp Lead") !== false) $fellow_badge['dc_lead'] = true;
 	if(stripos($all_groups, "HC Volunteer") !== false) $fellow_badge['hc_volunteer'] = true;
 	if(stripos($all_groups, "Finance Volunteer") !== false) $fellow_badge['finance_volunteer'] = true;
-	$money_raised = intval($sql->getOne("SELECT SUM(amount) FROM Donut_Donation 
-											WHERE fundraiser_user_id=$f[id] AND added_on > '$last_year-05-01 00:00:00'"));
+	if(stripos($all_groups, "Campaigns Volunteer") !== false) $fellow_badge['campaigns_volunteer'] = true;
+	
+	$money_raised = intval($sql->getOne("SELECT SUM(amount) FROM Donut_Donation WHERE fundraiser_user_id=$f[id] AND added_on > '$last_year-05-01 00:00:00'"));
 	if($money_raised > 200) $fellow_badge['fundraiser'] = true; // :TODO: Get actual number from FR
 	
 	$f['raised'] = $money_raised;

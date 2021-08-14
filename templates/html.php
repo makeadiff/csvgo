@@ -25,7 +25,11 @@ print "</tr>\n";
 foreach ($data as $row) { 
 	print "<tr>";
 	foreach ($row as $value) {
-		print "<td>$value</td>";
+		if(is_array($value)) {
+			print "<td>" . implode(",", $value) . "</td>";
+		} else {
+			print "<td>$value</td>";
+		}
 	}
 	print "</tr>\n";
 }
