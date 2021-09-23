@@ -15,4 +15,3 @@ foreach($data as $index => $user) {
 		$data[$index]['sourced_count'] = 0;
 	}
 }
-
