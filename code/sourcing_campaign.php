@@ -6,7 +6,7 @@ $data = $sql->getAll("SELECT U.id,U.name, C.name AS city, D.data AS campaign
 	WHERE U.user_type = 'volunteer' AND U.status = '1'
 	ORDER BY C.name, U.name");
 
-$campaign_preformance = $sql->getById("SELECT campaign, COUNT(id) AS sourced_count FROM User WHERE joined_on > '2021-09-01 00:00:00' GROUP BY campaign");
+$campaign_preformance = $sql->getById("SELECT campaign, COUNT(id) AS sourced_count FROM User WHERE joined_on >= '2021-09-19 00:00:00' GROUP BY campaign");
 
 foreach($data as $index => $user) {
 	if(isset($campaign_preformance[$user['campaign']])) {

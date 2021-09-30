@@ -31,10 +31,10 @@ $roles = [
 	0   => ['other'],
 ];
 $sourced_primary = $sql->getById("SELECT CONCAT(city_id,'_',applied_role) AS key_index, COUNT(id) AS applied_count FROM User 
-						WHERE joined_on > '2021-09-01 00:00:00' 
+						WHERE joined_on >= '2021-09-19 00:00:00' 
 						GROUP BY city_id,applied_role");
 $sourced_secondary = $sql->getById("SELECT CONCAT(city_id,'_',applied_role_secondary) AS key_index, COUNT(id) AS applied_count FROM User 
-						WHERE joined_on > '2021-09-01 00:00:00' 
+						WHERE joined_on >= '2021-09-19 00:00:00' 
 						GROUP BY city_id,applied_role_secondary");
 
 $all_cities = $sql->getById("SELECT id,name FROM City WHERE id NOT IN (0, 14, 26, 28)");
