@@ -21,7 +21,7 @@ $from = 0;
 $max_rows = 1000000;
 $applicants = [];
 
-$all_applicants = $sql->getById("SELECT U.id, U.name, C.name AS city, G.name AS user_group, U.user_type, V.name AS vertical, User.joined_on
+$all_applicants = $sql->getById("SELECT U.id, U.name, C.name AS city, G.name AS user_group, U.user_type, V.name AS vertical, U.joined_on
                                     FROM User U
                                     INNER JOIN City C ON C.id = U.city_id
                                     LEFT JOIN UserGroup UG ON UG.user_id = U.id AND UG.year = 2021
@@ -66,7 +66,7 @@ while($from < $max_rows) {
                     $madapp_user = $all_applicants[$user_id];
                     unset($all_applicants[$user_id]); // Memory saving.
                 } else {
-                    $madapp_user = $sql->getAssoc("SELECT U.id,U.name, C.name AS city, G.name AS user_group, U.user_type, V.name AS vertical, User.joined_on
+                    $madapp_user = $sql->getAssoc("SELECT U.id,U.name, C.name AS city, G.name AS user_group, U.user_type, V.name AS vertical, U.joined_on
                                                 FROM User U
                                                 INNER JOIN City C ON C.id = U.city_id
                                                 LEFT JOIN UserGroup UG ON UG.user_id = U.id AND UG.year = 2021
