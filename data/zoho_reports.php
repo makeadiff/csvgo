@@ -48,6 +48,8 @@ $fields_to_save = [
     'Available_for_RW',
     'Telephonic_Conversation_completed',
     'Moved_to_next_round',
+    'Applicant_Level',
+    'Trivia_Counter',
 ];
 $api_endpoint = 'https://creator.zoho.com/api/v2/jithincn1/mad-recruit/report/Visibility_Tracker1';
 if($verbose) print "Fetching Zoho Data...\n";
