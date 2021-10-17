@@ -50,6 +50,7 @@ $fields_to_save = [
     'Moved_to_next_round',
     'Applicant_Level',
     'Trivia_Counter',
+    'Screening_Status',
 ];
 $api_endpoint = 'https://creator.zoho.com/api/v2/jithincn1/mad-recruit/report/Visibility_Tracker1';
 if($verbose) print "Fetching Zoho Data...\n";
@@ -58,6 +59,8 @@ while($from < $max_rows) {
         if($verbose) print "\tGetting $from\n";
         $response = $zoho_client->request('GET', $api_endpoint . '?from=' . $from, []);
         if($response) {
+            // file_put_contents("temp.json", json_encode($response)); exit;
+
             foreach($response['data'] as $usr) {
                 $user_id = $usr['MAD_Applicant_Id'];
                 if(!is_numeric($user_id)) continue;
