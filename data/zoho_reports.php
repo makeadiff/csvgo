@@ -63,6 +63,7 @@ while($from < $max_rows) {
 
             foreach($response['data'] as $usr) {
                 $user_id = $usr['MAD_Applicant_Id'];
+                if(isset($usr['Latest_RW_Invite']['display_value'])) $usr['Latest_RW_Invite'] = $usr['Latest_RW_Invite']['display_value'];
                 if(!is_numeric($user_id)) continue;
                 // $applicants[$usr['MAD_Applicant_Id']] = array_pluck($usr, $fields_to_save);
                 $user = array_pluck($usr, $fields_to_save);
