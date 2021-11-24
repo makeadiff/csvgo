@@ -2,7 +2,7 @@
 function preProcessQuery($query) {
 	global $QUERY, $year;
 
-	$replace_options = [ 'city_id', 'center_id', 'batch_id', 'level_id', 'year', 'vertical_id' ];
+	$replace_options = [ 'city_id', 'center_id', 'batch_id', 'level_id', 'year', 'vertical_id', 'event_id' ];
 
 	if(!isset($QUERY['year'])) $QUERY['year'] = $year;
 
