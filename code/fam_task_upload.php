@@ -20,7 +20,14 @@ $tasks = $sql->getById("SELECT user_id AS id, common_task_url, preference_1_task
 
 foreach($applicants as $i => $apl) {
 	$user_id = $apl['id'];
-	if(!isset($tasks[$user_id])) continue;
+	if(!isset($tasks[$user_id])) {
+		$applicants[$i]['3day'] = '';
+		$applicants[$i]['written'] = '';
+		$applicants[$i]['preference_1_task'] = '';
+		$applicants[$i]['preference_2_task'] = '';
+		$applicants[$i]['preference_3_task'] = '';
+		continue;
+	}
 
 	$task = $tasks[$user_id];
 
