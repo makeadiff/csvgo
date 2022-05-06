@@ -33,11 +33,11 @@ foreach($applicants as $i => $apl) {
 
 	$submitted_tasks = json_decode($task['common_task_url'], true);
 
-	$applicants[$i]['3day'] = empty($submitted_tasks['3day']) ? '' : 'Submitted';
-	$applicants[$i]['written'] = empty($submitted_tasks['written']) ? '' : 'Submitted';
-	$applicants[$i]['preference_1_task'] = empty($task['preference_1_task_files']) ? '' : 'Submitted';
-	$applicants[$i]['preference_2_task'] = empty($task['preference_2_task_files']) ? '' : 'Submitted';
-	$applicants[$i]['preference_3_task'] = empty($task['preference_3_task_files']) ? '' : 'Submitted';
+	$applicants[$i]['3day'] = i($submitted_tasks, '3day', '');
+	$applicants[$i]['written'] = i($submitted_tasks, 'written', '');
+	$applicants[$i]['preference_1_task'] = empty($task['preference_1_task_files']) ? '' : implode(' , ', json_decode($task['preference_1_task_files'], true));
+	$applicants[$i]['preference_2_task'] = empty($task['preference_2_task_files']) ? '' : implode(' , ', json_decode($task['preference_2_task_files'], true));
+	$applicants[$i]['preference_3_task'] = empty($task['preference_3_task_files']) ? '' : implode(' , ', json_decode($task['preference_3_task_files'], true));
 }
 
 $data = $applicants;
