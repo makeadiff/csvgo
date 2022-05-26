@@ -1,5 +1,5 @@
 <?php
-$year = 2020; // :HARDCODE: Should be ($year - 1)
+$year = 2021; // :HARDCODE: Should be ($year - 1)
 $photo_folders = [ realpath(__DIR__ . '/../../continuation_signup/photo_uploads'), realpath(__DIR__ . '/../../../storage/users/profile_photos/600x800') ];
 
 $common = new Common;
