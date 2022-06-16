@@ -8,7 +8,7 @@ $survey_event_id = 154;
 
 $query = "SELECT U.id,U.name, U.email, C.name AS city, 'No' AS filled,
 
-		(SELECT added_on FROM Survey_Response WHERE responder_id = U.id AND survey_question_id = $are_you_continuting_question_id LIMIT 0,1) AS added_on,
+		(SELECT added_on FROM Survey_Response WHERE responder_id = U.id AND survey_question_id IN (629, 661, 662, 663, 664) ORDER BY added_on DESC LIMIT 0,1) AS last_updated_on,
 		(SELECT survey_choice_id FROM Survey_Response SR WHERE responder_id = U.id AND survey_question_id = $are_you_continuting_question_id LIMIT 0,1) AS continuing,
 		(SELECT G.name FROM `Group` G INNER JOIN UserGroup UG ON UG.group_id = G.id WHERE UG.year = $year AND UG.user_id=U.id AND UG.main = '1') AS main_role,
 
@@ -34,6 +34,13 @@ foreach($data as $i => $row) {
 		$row['filled'] = 'Yes';
 		if($row['continuing'] == $continuing_choice_id) $row['continuing'] = 'Yes';
 		else $row['continuing'] = 'No';
+	}
+
+	if($row['continuing'] == 'No') {
+		$row['upcoming_city'] = '';
+		$row['location'] = '';
+		$row['weekend_availability'] = '';
+		$row['weekday_availability'] = '';
 	}
 	$row['discontinue_reason'] = str_replace(['::', '\\'], '', $row['discontinue_reason']);
 
