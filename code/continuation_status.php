@@ -19,7 +19,9 @@ $query = "SELECT U.id,U.name, U.email, C.name AS city, 'No' AS filled,
 			WHERE responder_id = U.id AND SR.survey_question_id = 663 LIMIT 0,1) AS weekday_availability,
 		(SELECT SC.name FROM Survey_Response SR INNER JOIN Survey_Choice SC ON SR.survey_choice_id = SC.id 
 			WHERE responder_id = U.id AND SR.survey_question_id = 664 LIMIT 0,1) AS weekend_availability,
-		(SELECT data from UserData WHERE user_id = U.id AND name='reason_to_discontinue_2021') AS discontinue_reason
+		(SELECT data from UserData WHERE user_id = U.id AND name='reason_to_discontinue_2021') AS discontinue_reason,
+		U.credit,
+		0 AS fundraised_amount
 		
 	FROM User U 
 	INNER JOIN City C ON C.id=U.city_id
@@ -43,6 +45,16 @@ foreach($data as $i => $row) {
 		$row['weekday_availability'] = '';
 	}
 	$row['discontinue_reason'] = str_replace(['::', '\\'], '', $row['discontinue_reason']);
+
+	$user_id = $row['id'];
+
+	$donut_amount = $sql->getOne("SELECT SUM(amount) FROM Donut_Donation WHERE fundraiser_user_id=".$user_id." AND added_on >= '$year-06-01'");
+	$online_donations = $sql->getOne("SELECT SUM(amount) FROM Online_Donation WHERE fundraiser_user_id=".$user_id." AND added_on >= '$year-06-01' AND payment='success'");
+
+	if(!$donut_amount) $donut_amount = 0;
+	if($online_donations) $donut_amount += $online_donations;
+
+	$row['fundraised_amount'] = round($donut_amount);
 
 	$data[$i] = $row;
 }
